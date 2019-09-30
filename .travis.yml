@@ -4,8 +4,6 @@ sudo: required
 group: deprecated-2017Q4
 
 php:
-  - 7.1
-  - 7.2
   - 7.3
 
 matrix:
@@ -37,7 +35,7 @@ install:
 
 before_script:
   - sudo chmod -R 777 storage
-  - cp .env.example .env
+  - cp .env.travis .env
 
   # show some versions and env information
   - mysql --version
