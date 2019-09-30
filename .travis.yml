@@ -42,13 +42,14 @@ before_script:
   - php --version
   - composer --version
 
-  - php artisan migrate --env=local --database=homestead --no-interaction -vvv
-  - php artisan db:seed --env=local --no-interaction -vvv
+  - php artisan migrate --env=testing --database=homestead --no-interaction -vvv
+  - php artisan db:seed --env=testing --no-interaction -vvv
 
 script:
   - php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=storage/logs/clover.xml
 
 after_script:
+  - - php artisan migrate:rollback --env=testing --no-interaction -vvv
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=clover storage/logs/clover.xml
 
