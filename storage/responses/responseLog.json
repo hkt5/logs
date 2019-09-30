@@ -1,0 +1,14 @@
+{
+    "content" : {
+        "user" : "user",
+        "base_path" : "base_path",
+        "client_ip" : "127.0.0.1",
+        "host" : "http://localhost",
+        "query_string" : "hello=world",
+        "request_uri" : "/my_action",
+        "user_info" : "info",
+        "reason" : "you must login",
+        "message" : "message"
+    },
+    "error_message" : []
+}

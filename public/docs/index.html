@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Welcome to the generated API reference.
+<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<!-- END_INFO -->
+<h1>general</h1>
+<!-- START_7d260b3c574f75742b2ac0118c36cb64 -->
+<h2>Show all logs.</h2>
+<p>[Show all user logs.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "/all" </code></pre>
+<pre><code class="language-javascript">const url = new URL("/all");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": [],
+    "error_messages": []
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET /all</code></p>
+<!-- END_7d260b3c574f75742b2ac0118c36cb64 -->
+<!-- START_bc05019f8e3ad49eb15ba5bad0647e7f -->
+<h2>Create user log.</h2>
+<p>[Create full user log.]</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "/create" \
+    -H "Content-Type: application/json" \
+    -d '{"user":"omnis","base_path":"vero","client_ip":"placeat","host":"qui","query_string":"iusto","request_uri":"rem","user_info":"non","reason":"rerum","message":"sapiente"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("/create");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "user": "omnis",
+    "base_path": "vero",
+    "client_ip": "placeat",
+    "host": "qui",
+    "query_string": "iusto",
+    "request_uri": "rem",
+    "user_info": "non",
+    "reason": "rerum",
+    "message": "sapiente"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "content": {
+        "user": "user",
+        "base_path": "base_path",
+        "client_ip": "127.0.0.1",
+        "host": "http:\/\/localhost",
+        "query_string": "hello=world",
+        "request_uri": "\/my_action",
+        "user_info": "info",
+        "reason": "you must login",
+        "message": "message"
+    },
+    "error_message": []
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST /create</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>required</td>
+<td>optional</td>
+<td>The current user.</td>
+</tr>
+<tr>
+<td>base_path</td>
+<td>required</td>
+<td>optional</td>
+<td>The base path.</td>
+</tr>
+<tr>
+<td>client_ip</td>
+<td>required</td>
+<td>optional</td>
+<td>The user ip.</td>
+</tr>
+<tr>
+<td>host</td>
+<td>required</td>
+<td>optional</td>
+<td>The user host.</td>
+</tr>
+<tr>
+<td>query_string</td>
+<td>required</td>
+<td>optional</td>
+<td>The query string.</td>
+</tr>
+<tr>
+<td>request_uri</td>
+<td>required</td>
+<td>optional</td>
+<td>The request uri.</td>
+</tr>
+<tr>
+<td>user_info</td>
+<td>required</td>
+<td>optional</td>
+<td>The user info.</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>required</td>
+<td>optional</td>
+<td>The short information about action.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>required</td>
+<td>optional</td>
+<td>The short message about action.</td>
+</tr>
+</tbody>
+</table>
+<!-- END_bc05019f8e3ad49eb15ba5bad0647e7f -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>
