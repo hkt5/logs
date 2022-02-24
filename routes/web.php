@@ -15,4 +15,5 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 $router->get('/all', 'ShowAllLogsController@index');
+$router->get('/paginate', 'ShowAllLogsController@paginate');
 $router->post('/create', 'CreateLogController@index');

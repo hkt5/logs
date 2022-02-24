@@ -1,14 +1,12 @@
 <?php
 
+namespace Tests;
 
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 
 class CreateLogControllerTest extends TestCase
 {
-
-    use DatabaseMigrations;
-
     public function testCreateLog() : void
     {
 
