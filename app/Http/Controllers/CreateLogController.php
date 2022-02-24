@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class CreateLogController extends Controller
 {
 
-    private $createLogService;
+    private CreateLogService $createLogService;
 
     public function __construct(CreateLogService $createLogService)
     {
