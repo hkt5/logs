@@ -38,17 +38,13 @@ class ShowAllLogsController extends Controller
      *
      * @responseFile responses/responseLogs.json
      */
-    public function paginate(Request $request, int $size = null) : JsonResponse
+    public function paginate(Request $request) : JsonResponse
     {
-
-        if($size == null) {
-            $size = 15;
-        }
 
         try {
             return response()->json(
                 [
-                    'content' => DB::table('logs')->orderBy('created_at', 'desc')->paginate($size),
+                    'content' => DB::table('logs')->orderBy('created_at', 'desc')->paginate(25),
                     'error_messages' => []
                 ],
                 Response::HTTP_OK);
