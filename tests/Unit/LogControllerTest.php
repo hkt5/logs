@@ -1,12 +1,57 @@
 <?php
 
-namespace Tests;
+namespace Tests\Unit;
 
+use App\Log;
 use Illuminate\Http\Response;
-use Laravel\Lumen\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
-class CreateLogControllerTest extends TestCase
+class LogControllerTest extends TestCase
 {
+    public function test_FindAllLogs() : void
+    {
+
+        // given
+        $log = new Log();
+
+        // when
+        $result = $this->get('/all');
+
+        // then
+        $result->seeStatusCode(Response::HTTP_OK);
+        $result->seeJson($log->attributesToArray());
+    }
+
+    public function test_FindLogById_And_LogExists() : void
+    {
+
+        // given
+        $id = 361674;
+        $log = Log::find($id);
+        $response = ['content' => $log, 'errors' => null];
+
+        // when
+        $result = $this->get("/by-id/".$id);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_OK);
+    }
+
+    public function test_FindLogById_And_LogNotExists() : void
+    {
+
+        // given
+        $id = 999999999999999999;
+        $response = ['content' => null, 'errors' => null];
+
+        // when
+        $result = $this->get('/by-id/'.$id);
+
+        // then
+        $result->seeStatusCode(Response::HTTP_NOT_FOUND);
+        $result->seeJson($response);
+    }
+
     public function testCreateLog() : void
     {
 
@@ -22,7 +67,7 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => $log, 'error_messages' => []];
+        $response = ['errors' => null];
 
         // when
         $result = $this->post('/create', $log);
@@ -46,13 +91,13 @@ class CreateLogControllerTest extends TestCase
             'user_info' => 'user_info',
             'message' => 'hello',
         ];
-        $response = ['content' => [], 'error_messages' => ['reason' => ["The reason field is required."]]];
+        $response = ['content' => null, 'errors' => ['reason' => ["The reason field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -70,13 +115,13 @@ class CreateLogControllerTest extends TestCase
             'user_info' => 'user_info',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['message' => ["The message field is required."]]];
+        $response = ['content' => null, 'errors' => ['message' => ["The message field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -94,13 +139,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['user_info' => ["The user info field is required."]]];
+        $response = ['content' => null, 'errors' => ['user_info' => ["The user info field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -118,13 +163,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['request_uri' => ["The request uri field is required."]]];
+        $response = ['content' => null, 'errors' => ['request_uri' => ["The request uri field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -142,13 +187,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['query_string' => ["The query string field is required."]]];
+        $response = ['content' => null, 'errors' => ['query_string' => ["The query string field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -166,13 +211,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['host' => ["The host field is required."]]];
+        $response = ['content' => null, 'errors' => ['host' => ["The host field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -190,13 +235,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['user' => ["The user field is required."]]];
+        $response = ['content' => null, 'errors' => ['user' => ["The user field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -214,13 +259,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['base_path' => ["The base path field is required."]]];
+        $response = ['content' => null, 'errors' => ['base_path' => ["The base path field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 
@@ -238,13 +283,13 @@ class CreateLogControllerTest extends TestCase
             'message' => 'hello',
             'reason' => 'world',
         ];
-        $response = ['content' => [], 'error_messages' => ['client_ip' => ["The client ip field is required."]]];
+        $response = ['content' => null, 'errors' => ['client_ip' => ["The client ip field is required."]]];
 
         // when
         $result = $this->post('/create', $log);
 
         // then
-        $result->seeStatusCode(Response::HTTP_BAD_REQUEST);
+        $result->seeStatusCode(Response::HTTP_NOT_ACCEPTABLE);
         $result->seeJson($response);
     }
 }
