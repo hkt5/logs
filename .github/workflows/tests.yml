@@ -31,7 +31,3 @@ jobs:
           mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
     - uses: actions/checkout@v1
     - uses: carlosabcs/lumen-phpunit-action@master
-  prefer-dist
-    - name: Run Migration
-      run: |
-        php artisan migrate --force
