@@ -1,33 +1,31 @@
-name: PHPUnit
-
+name: Build and Deploy
 on:
-  pull_request: {}
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            -   master
 
 jobs:
-  phpunit:
-    name: tests
-
-    runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        env:
-          MYSQL_ROOT_PASSWORD:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_USER: user
-          MYSQL_PASSWORD: user
-          MYSQL_DATABASE: dbname
-
-    steps:
-    - name: Set up MySQL
-      run: |
-        sudo mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-    - uses: actions/checkout@v1
-    - uses: carlosabcs/lumen-phpunit-action@master
+    build:
+        name: Build and Deploy
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout Repository
+                uses: actions/checkout@master
+            -   name: Setup Enviroment
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: '8,0'
+            -   name: Speed up the packages installation process
+                run: composer global require hirak/prestissimo
+            -   name: Install Packages
+                run: composer install --no-dev
+            -   name: Deploy to Server
+                uses: kosratdev/laravel-deploy-migrate@laravel
+                with:
+                    user: user
+                    host: host
+                    port: port
+                    path: path
+                    owner: owner
+                env:
+                    DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
