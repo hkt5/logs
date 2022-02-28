@@ -31,12 +31,12 @@ jobs:
       - name: Copy .env
         run: |
           php -r "file_exists('.env') || copy('.env.github', '.env');"
-      name: Migration
-        run: |
-          php artisan migrate --seed
       - name: Update Composer
         run: sudo composer self-update 1.10.15 --no-interaction
       - name: Run Composer Install
         run: composer install --no-interaction
+      - name: Migration
+        run: |
+          php artisan migrate && php artisan db:seed
       - name: run tests
         run: vendor/bin/phpunit
