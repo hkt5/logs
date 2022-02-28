@@ -1,31 +1,39 @@
-name: Build and Deploy
-on:
-    push:
-        branches:
-            -   master
-
+name: Tests
+on: [push, pull_request]
 jobs:
-    build:
-        name: Build and Deploy
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout Repository
-                uses: actions/checkout@master
-            -   name: Setup Enviroment
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8,0'
-            -   name: Speed up the packages installation process
-                run: composer global require hirak/prestissimo
-            -   name: Install Packages
-                run: composer install --no-dev
-            -   name: Deploy to Server
-                uses: kosratdev/laravel-deploy-migrate@laravel
-                with:
-                    user: user
-                    host: host
-                    port: port
-                    path: path
-                    owner: owner
-                env:
-                    DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+  lumen-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: ['ubuntu-latest']
+        php-versions: ['7.4']
+        phpunit-versions: ['latest']
+        include:
+          - operating-system: 'ubuntu-latest'
+            php-versions: '8.0'
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_DATABASE: test_database
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: rootpass
+          MYSQL_ROOT_PASSWORD: rootpass
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nanasess/setup-php@master
+        with:
+          php-version: '7.4'
+      - name: Copy .env
+        run: |
+          php -r "file_exists('.env') || copy('.env.github', '.env');"
+      - name: Update Composer
+        run: sudo composer self-update 1.10.15 --no-interaction
+      - name: Run Composer Install
+        run: composer install --no-interaction
+      - name: run tests
+        run: vendor/bin/phpunit
