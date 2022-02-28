@@ -28,6 +28,6 @@ jobs:
     - uses: actions/checkout@v1
     - uses: carlosabcs/lumen-phpunit-action@master
 prefer-dist
-    - name: Run Migration
-      run: |
-        php artisan migrate --force
+  - name: Run Migration
+    run: |
+      php artisan migrate --force
