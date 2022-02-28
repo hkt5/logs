@@ -1,0 +1,29 @@
+name: PHPUnit
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - master
+
+jobs:
+  phpunit:
+    name: PHPUnit
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: user
+          MYSQL_PASSWORD: user
+          MYSQL_DATABASE: dbname
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: carlosabcs/lumen-phpunit-action@master
