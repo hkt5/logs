@@ -1,0 +1,77 @@
+version: '1'
+
+networks:
+    laravel:
+        name: silenceonthewire-logs
+
+services:
+    site:
+        image: nginx:1-alpine
+        container_name: laravel-nginx
+        restart: unless-stopped
+        ports:
+            - '${NGINX_PORT:-80}:80'
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./docker/nginx/general.conf:/etc/nginx/general.conf
+            - ./docker/nginx/php_fastcgi.conf:/etc/nginx/php_fastcgi.conf
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - mysql
+            - pgsql
+            - php
+            - redis
+        networks:
+            - silenceonthewire
+
+    mysql:
+        image: mysql:8
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: laravel-mysql
+        restart: unless-stopped
+        tty: true
+        ports:
+            - '${FORWARD_MYSQL_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-secret}'
+            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+        volumes:
+            - '${MYSQL_DB_VOLUME:-~/.mysql8/}:/var/lib/mysql'
+        networks:
+            - silenceonthewire
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+            retries: 3
+            timeout: 5s
+
+    pgsql:
+        image: postgres:13
+        container_name: laravel-pgsql
+        restart: unless-stopped
+        ports:
+            - '${FORWARD_PGSQL_DB_PORT:-5432}:5432'
+        environment:
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+        volumes:
+            - '${PGSQL_DB_VOLUME:-~/.pgsql13/}:/var/lib/postgresql/data'
+        networks:
+            - silenceonthewire
+        healthcheck:
+            test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
+
+    php:
+        image: devmoath/php-8-laravel-dev
+        container_name: silenceonthewire-logs
+        restart: unless-stopped
+        volumes:
+            - ./:/var/www/html
+            - '~/.config/psysh/psysh_history:/root/.config/psysh/psysh_history'
+            - '~/.composer:${COMPOSER_HOME:-/tmp}'
+            - /tmp/phpstan:/tmp/phpstan
+        networks:
+            - silenceonthewire
