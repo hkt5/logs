@@ -12,8 +12,6 @@ The first is database instalation. You must use command:
 php artisan migrate --seed
 ```
 
-Documentation for the chat microservice can be found on the [http://powerful-oasis-79737.herokuapp.com/docs](http://powerful-oasis-79737.herokuapp.com/docs).
-
 ### Apache setup
 
 Use .htaccess:
