@@ -26,7 +26,7 @@ class LogControllerTest extends TestCase
     {
 
         // given
-        $id = 361674;
+        $id = 1;
         $log = Log::find($id);
         $response = ['content' => $log, 'errors' => null];
 

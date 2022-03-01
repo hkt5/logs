@@ -35,7 +35,7 @@ class LogServiceTest extends TestCase
     {
 
         // given
-        $id = 361674;
+        $id = 1;
         $log = Log::find($id);
         $service = new LogService(new LogRepository(), new StoreLogService(new LogRepository));
         $responseCode = Response::HTTP_OK;
