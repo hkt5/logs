@@ -23,7 +23,7 @@ services:
             - php
             - redis
         networks:
-            - silenceonthewire
+            - silenceonthewire-logs
 
     mysql:
         image: mysql:8
@@ -41,29 +41,11 @@ services:
         volumes:
             - '${MYSQL_DB_VOLUME:-~/.mysql8/}:/var/lib/mysql'
         networks:
-            - silenceonthewire
+            - silenceonthewire-logs
         healthcheck:
             test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
             retries: 3
             timeout: 5s
-
-    pgsql:
-        image: postgres:13
-        container_name: laravel-pgsql
-        restart: unless-stopped
-        ports:
-            - '${FORWARD_PGSQL_DB_PORT:-5432}:5432'
-        environment:
-            POSTGRES_DB: '${DB_DATABASE}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
-        volumes:
-            - '${PGSQL_DB_VOLUME:-~/.pgsql13/}:/var/lib/postgresql/data'
-        networks:
-            - silenceonthewire
-        healthcheck:
-            test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
-
     php:
         image: devmoath/php-8-laravel-dev
         container_name: silenceonthewire-logs
@@ -74,4 +56,4 @@ services:
             - '~/.composer:${COMPOSER_HOME:-/tmp}'
             - /tmp/phpstan:/tmp/phpstan
         networks:
-            - silenceonthewire
+            - silenceonthewire-logs
