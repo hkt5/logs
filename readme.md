@@ -1,6 +1,10 @@
 # SilenceOnTheWire Lumen Logs implementation
 
-This is a simple interpretation of the chat application for everyone based on the GPL 3.0 license. Code under the GNU GPL license cannot be used in programs based on other licenses.
+This microservice allows you to create logs from another application, e.g. Laravel applications and read them.
+
+This is a simple interpretation of the logs microservice for everyone based on Lumen Framework and the GPL 3.0 license. Code under the GNU GPL license cannot be used in programs based on other licenses.
+
+
 
 ## Official Documentation
 
