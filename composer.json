@@ -1,7 +1,7 @@
 {
     "name": "silenceonthewire/logs",
     "description": "Our log api..",
-    "keywords": ["framework", "laravel", "lumen"],
+    "keywords": ["framework", "laravel", "lumen", "logs", "logs microservie", "lumen logs microservie"],
     "license": "GPL3",
     "type": "project",
     "require": {
