@@ -4,7 +4,17 @@ This microservice allows you to create logs from another application, e.g. Larav
 
 This is a simple interpretation of the logs microservice for everyone based on Lumen Framework and the GPL 3.0 license. Code under the GNU GPL license cannot be used in programs based on other licenses.
 
+## Required microservices
 
+This microservice required users microservice:
+
+(https://github.com/hkt5/users)[https://github.com/hkt5/users]
+
+and setup .env variable
+
+```bash
+AUTH_URL=127.0.0.1:8001/api/logs
+```
 
 ## Official Documentation
 
