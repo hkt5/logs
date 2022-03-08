@@ -8,7 +8,7 @@ This is a simple interpretation of the logs microservice for everyone based on L
 
 This microservice required users microservice:
 
-(https://github.com/hkt5/users)[https://github.com/hkt5/users]
+https://github.com/hkt5/users
 
 and setup .env variable
 
