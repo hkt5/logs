@@ -4,10 +4,15 @@ namespace Tests\Unit;
 
 use App\Log;
 use Illuminate\Http\Response;
+use Laravel\Lumen\Testing\WithoutEvents;
+use Laravel\Lumen\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class LogControllerTest extends TestCase
 {
+    use WithoutMiddleware;
+    use WithoutEvents;
+
     public function test_FindAllLogs() : void
     {
 
@@ -27,8 +32,6 @@ class LogControllerTest extends TestCase
 
         // given
         $id = 1;
-        $log = Log::find($id);
-        $response = ['content' => $log, 'errors' => null];
 
         // when
         $result = $this->get("/by-id/".$id);
