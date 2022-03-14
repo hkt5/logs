@@ -19,7 +19,7 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->header('Bareer') != null) {
+        if ($request->header('Bearer') != null) {
             $result = Http::post(env('AUTH_URL'), $request->header('Bareer'));
             if ($result->status() != Response::HTTP_OK) {
                 return response('Unauthorized.', 401);

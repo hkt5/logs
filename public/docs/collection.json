@@ -1,0 +1,208 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "Silence On the Wire Logs",
+        "_postman_id": "8eb38060-27a4-471f-8c12-664c191d4355",
+        "description": "Microservice Logs.",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "\/",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "\/",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/\/"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Bearer",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "Lumen (9.0.1) (Laravel Components ^9.0)",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "findAll",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/all"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Bearer",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Find all logs.\n<aside class=\"notice\">Require users microservice.<\/aside>",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"content\": [\n  {\n      \"id\": 1,\n      \"user\": \"user\",\n      \"base_path\": \"\/\",\n      \"client_ip\": \"127.0.0.1\",\n      \"host\": \"http:\/\/localhost\",\n      \"query_string\": \"name=hello_world\",\n      \"request_uri\": \"\/create\",\n      \"user_info\": \"user_info\",\n      \"message\": \"hello\",\n      \"reason\": \"world\",\n      \"created_at\": \"2022-03-14T12:57:41.000000Z\",\n      \"updated_at\": \"2022-03-14T12:57:41.000000Z\",\n },\n],\n\"errors\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "findById",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "by-id\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/by-id\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "sit",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Bearer",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Find log by id.\n<aside class=\"notice\">Require users microservice.<\/aside>",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"content\": {\n      \"user\": \"et\",\n      \"base_path\": \"sint\",\n      \"client_ip\": \"aut\",\n      \"host\": \"magnam\",\n      \"query_string\": \"illo\",\n      \"request_uri\": \"sed\",\n      \"user_info\": \"nisi\",\n      \"reason\": \"odio\",\n      \"message\": \"accusantium\",\n      \"created_at\": \"2022-03-14T12:57:41.000000Z\",\n      \"updated_at\": \"2022-03-14T12:57:41.000000Z\",\n      \"id\": 21\n  },\n  \"errors\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "store",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Bearer",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user\":\"temporibus\",\"client_ip\":\"consequatur\",\"base_path\":\"doloribus\",\"host\":\"cumque\",\"query_string\":\"consequuntur\",\"request_uri\":\"qui\",\"user_info\":\"deserunt\",\"reason\":\"quod\",\"message\":\"eveniet\"}"
+                        },
+                        "description": "Store new log.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"content\": {\n  \"user\": \"et\",\n  \"base_path\": \"sint\",\n  \"client_ip\": \"aut\",\n  \"host\": \"magnam\",\n  \"query_string\": \"illo\",\n  \"request_uri\": \"sed\",\n  \"user_info\": \"nisi\",\n  \"reason\": \"odio\",\n  \"message\": \"accusantium\",\n  \"created_at\": \"2022-03-14T12:57:41.000000Z\",\n  \"updated_at\": \"2022-03-14T12:57:41.000000Z\",\n  \"id\": 21\n},\n\"errors\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer"
+    }
+}
