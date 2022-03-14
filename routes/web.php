@@ -14,8 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->group(['middleware' => 'auth'], function () use ($router) {
+
     $router->get('/all', 'LogController@findAll');
     $router->get('/by-id/{id}', 'LogController@findById');
-});
 $router->post('/create', 'LogController@store');

@@ -23,7 +23,7 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-$app->configure('apidoc.php');
+$app->configure('scribe');
 
 $app->withFacades();
 
@@ -84,6 +84,7 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+$app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

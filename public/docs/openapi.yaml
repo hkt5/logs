@@ -1,0 +1,298 @@
+openapi: 3.0.3
+info:
+  title: 'Silence On the Wire Logs'
+  description: 'Microservice Logs.'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+paths:
+  /:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Bearer
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'Lumen (9.0.1) (Laravel Components ^9.0)'
+      tags:
+        - Endpoints
+      security: []
+  /all:
+    get:
+      summary: findAll
+      description: "Find all logs.\n<aside class=\"notice\">Require users microservice.</aside>"
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Bearer
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"content\": [\n  {\n      \"id\": 1,\n      \"user\": \"user\",\n      \"base_path\": \"/\",\n      \"client_ip\": \"127.0.0.1\",\n      \"host\": \"http://localhost\",\n      \"query_string\": \"name=hello_world\",\n      \"request_uri\": \"/create\",\n      \"user_info\": \"user_info\",\n      \"message\": \"hello\",\n      \"reason\": \"world\",\n      \"created_at\": \"2022-03-14T12:57:41.000000Z\",\n      \"updated_at\": \"2022-03-14T12:57:41.000000Z\",\n },\n],\n\"errors\": null\n}"
+      tags:
+        - Endpoints
+      security: []
+  '/by-id/{id}':
+    get:
+      summary: findById
+      description: "Find log by id.\n<aside class=\"notice\">Require users microservice.</aside>"
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Bearer
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  content:
+                    user: et
+                    base_path: sint
+                    client_ip: aut
+                    host: magnam
+                    query_string: illo
+                    request_uri: sed
+                    user_info: nisi
+                    reason: odio
+                    message: accusantium
+                    created_at: '2022-03-14T12:57:41.000000Z'
+                    updated_at: '2022-03-14T12:57:41.000000Z'
+                    id: 21
+                  errors: null
+                properties:
+                  content:
+                    type: object
+                    example:
+                      user: et
+                      base_path: sint
+                      client_ip: aut
+                      host: magnam
+                      query_string: illo
+                      request_uri: sed
+                      user_info: nisi
+                      reason: odio
+                      message: accusantium
+                      created_at: '2022-03-14T12:57:41.000000Z'
+                      updated_at: '2022-03-14T12:57:41.000000Z'
+                      id: 21
+                  errors:
+                    type: string
+                    example: null
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: ''
+        example: sit
+        required: true
+        schema:
+          type: string
+  /create:
+    post:
+      summary: store
+      description: 'Store new log.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Bearer
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  content:
+                    user: et
+                    base_path: sint
+                    client_ip: aut
+                    host: magnam
+                    query_string: illo
+                    request_uri: sed
+                    user_info: nisi
+                    reason: odio
+                    message: accusantium
+                    created_at: '2022-03-14T12:57:41.000000Z'
+                    updated_at: '2022-03-14T12:57:41.000000Z'
+                    id: 21
+                  errors: null
+                properties:
+                  content:
+                    type: object
+                    example:
+                      user: et
+                      base_path: sint
+                      client_ip: aut
+                      host: magnam
+                      query_string: illo
+                      request_uri: sed
+                      user_info: nisi
+                      reason: odio
+                      message: accusantium
+                      created_at: '2022-03-14T12:57:41.000000Z'
+                      updated_at: '2022-03-14T12:57:41.000000Z'
+                      id: 21
+                  errors:
+                    type: string
+                    example: null
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                  description: 'Current application user.'
+                  example: temporibus
+                client_ip:
+                  type: string
+                  description: 'Current application user ip.'
+                  example: consequatur
+                base_path:
+                  type: string
+                  description: 'Current application user base path.'
+                  example: doloribus
+                host:
+                  type: string
+                  description: 'Current application user host.'
+                  example: cumque
+                query_string:
+                  type: string
+                  description: 'Current application user query string.'
+                  example: consequuntur
+                request_uri:
+                  type: string
+                  description: 'Current application user request uri.'
+                  example: qui
+                user_info:
+                  type: string
+                  description: 'Current application user info.'
+                  example: deserunt
+                reason:
+                  type: string
+                  description: 'Request reason.'
+                  example: quod
+                message:
+                  type: string
+                  description: 'Current application user message.'
+                  example: eveniet
+              required:
+                - user
+                - client_ip
+                - base_path
+                - host
+                - query_string
+                - request_uri
+                - user_info
+                - reason
+                - message
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

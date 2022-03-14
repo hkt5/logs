@@ -26,6 +26,12 @@ The first is database instalation. You must use command:
 php artisan migrate --seed
 ```
 
+If you want generate documentation, please use this command:
+
+```bash
+php artisan scribe:generate
+```
+
 ### Apache setup
 
 Use .htaccess:

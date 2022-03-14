@@ -15,15 +15,15 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user')->nullable();
-            $table->text('base_path')->nullable();
-            $table->text('client_ip')->nullable();
-            $table->text('host')->nullable();
-            $table->text('query_string')->nullable();
-            $table->text('request_uri')->nullable();
-            $table->text('user_info')->nullable();
-            $table->text('message')->nullable();
-            $table->text('reason')->nullable();
+            $table->string('user')->nullable()->default(null);
+            $table->text('base_path')->nullable()->default(null);
+            $table->text('client_ip')->nullable(true)->default('127.0.0.1');
+            $table->text('host')->nullable()->default(null);
+            $table->text('query_string')->nullable()->default(null);
+            $table->text('request_uri')->nullable()->default(null);
+            $table->text('user_info')->nullable()->default(null);
+            $table->text('message')->nullable()->default(null);
+            $table->text('reason')->nullable()->default(null);
             $table->timestamps();
         });
     }
